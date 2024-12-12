@@ -1,0 +1,11 @@
+.generic {
+    text-align: center;
+    font-family: 'Times New Roman';
+    background-color: antiquewhite;
+    padding: 20px;
+    margin-top: 10px;
+    font-size: 40px;
+    font-style: italic;
+    color: chocolate;
+    padding-bottom: 50px;
+}
