@@ -1,0 +1,51 @@
+.cart {
+    font-family: 'Algerian';
+    text-align: center;
+    margin-top: 1rem;
+    color: white;
+}
+
+.button {
+    margin-left: 27rem;
+    margin-top: -7rem;
+    margin-right: 1.5rem;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 97vh;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.75);
+    justify-content: center;
+    align-items: center;
+    margin-left: 69%;
+    margin-top: 1rem;
+    border: 2px solid lightblue;
+    border-radius: 5px;
+}
+
+.cont {
+    font-family: Conella MT;
+    color: white;
+    margin-top: -1rem;
+}
+
+.total {
+    color: white;
+    font-family: 'Times New Roman';
+    padding-top: 28px;
+    margin-left: 20rem;
+}
+
+.purchase {
+    margin-left: 11rem;
+}
+
+.img {
+    width: 50%;
+    padding-top: 50px;
+    padding-right: 10px;
+    margin-left: -2rem;
+}
