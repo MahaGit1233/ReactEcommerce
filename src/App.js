@@ -1,7 +1,9 @@
-import { Card, Col, Container, Row } from "react-bootstrap";
-import Header from "./Components/Header";
-import Cart from "./Components/Cart";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import Header from "./Components/Header/Header";
+import Cart from "./Components/Header/Cart";
+import CartProvider from "./Components/Store/CartProvider";
 import { useState } from "react";
+import Layout from "./Components/Layout/Layout";
 
 const DummyPhotosArr = [
   { id: 1, title: 'Colors', price: 100, imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png' },
@@ -22,25 +24,11 @@ function App() {
   }
 
   return (
-    <div>
+    <CartProvider>
       <Header onConfirm={cartHandler}/>
-      {showCart && <Cart photos={DummyPhotosArr} onClose={closeBtnHandler}/>}
-      <Container className="mt-5">
-        <Row style={{ marginLeft: "20rem" }}>
-          {DummyPhotosArr.map((photo) => (
-            <Col xs={5}>
-              <Card className="mb-5" style={{ width: "300px" }}>
-                <Card.Body>
-                  <Card.Title>{photo.title}</Card.Title>
-                  <Card.Img src={photo.imageUrl} style={{ marginBottom: "15px" }} />
-                  <Card.Text>Price: ₹{photo.price}</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      </Container>
-    </div>
+      {showCart && <Cart photosToCart={DummyPhotosArr} onClose={closeBtnHandler}/>}
+      <Layout photos={DummyPhotosArr}/>
+    </CartProvider>
   );
 }
 
