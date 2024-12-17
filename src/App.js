@@ -1,9 +1,12 @@
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import Header from "./Components/Header/Header";
 import Cart from "./Components/Header/Cart";
 import CartProvider from "./Components/Store/CartProvider";
 import { useState } from "react";
-import Layout from "./Components/Layout/Layout";
+import Home from "./Components/Pages/Home";
+import ColorStore from "./Components/Pages/ColorStore";
+import About from "./Components/Pages/About";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 
 const DummyPhotosArr = [
   { id: 1, title: 'Colors', price: 100, imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png' },
@@ -25,9 +28,15 @@ function App() {
 
   return (
     <CartProvider>
-      <Header onConfirm={cartHandler}/>
-      {showCart && <Cart photosToCart={DummyPhotosArr} onClose={closeBtnHandler}/>}
-      <Layout photos={DummyPhotosArr}/>
+      <BrowserRouter>
+        <Header onConfirm={cartHandler} />
+        {showCart && <Cart photosToCart={DummyPhotosArr} onClose={closeBtnHandler} />}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/ColorStore" element={<ColorStore photos={DummyPhotosArr}/>} />
+          <Route path="/About" element={<About />} />
+        </Routes>
+      </BrowserRouter>
     </CartProvider>
   );
 }

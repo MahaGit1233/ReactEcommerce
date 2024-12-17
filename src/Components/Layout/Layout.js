@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import CartContext from "../Store/cart-context";
+import "./Layout.css"
 
 const Layout = (props) => {
     const [quantity,setQuantity]=useState(1);
@@ -25,7 +26,7 @@ const Layout = (props) => {
                         <Card className="mb-5" style={{ width: "300px" }}>
                             <Card.Body>
                                 <Card.Title>{photo.title}</Card.Title>
-                                <Card.Img src={photo.imageUrl} style={{ marginBottom: "15px" }} />
+                                <Card.Img src={photo.imageUrl} style={{ marginBottom: "15px" }} className="cardImg"/>
                                 <Card.Text>Price: ₹{photo.price}<Button style={{ marginLeft: "4rem" }} onClick={()=>addToCartHandler(photo)}>ADD TO CART</Button></Card.Text>
                             </Card.Body>
                         </Card>
