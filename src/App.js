@@ -6,6 +6,7 @@ import Home from "./Components/Pages/Home";
 import ColorStore from "./Components/Pages/ColorStore";
 import About from "./Components/Pages/About";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Footer from "./Components/Layout/Footer";
 
 
 const DummyPhotosArr = [
@@ -36,6 +37,7 @@ function App() {
           <Route path="/ColorStore" element={<ColorStore photos={DummyPhotosArr}/>} />
           <Route path="/About" element={<About />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </CartProvider>
   );
