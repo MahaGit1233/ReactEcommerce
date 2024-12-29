@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
 import Home from "./Components/Pages/Home";
 import ColorStore from "./Components/Pages/ColorStore";
 import About from "./Components/Pages/About";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Footer from "./Components/Layout/Footer";
 import Contact from "./Components/Pages/Contact";
 
@@ -30,7 +30,7 @@ function App() {
 
   const saveDataHandler = useCallback(async (enteredData) => {
     const response = await fetch("https://react-api-73b69-default-rtdb.firebaseio.com/ecommerce.json", {
-      method:"POST",
+      method: "POST",
       body: JSON.stringify(enteredData),
       headers: {
         'Content-Type': 'application/json',
@@ -45,12 +45,12 @@ function App() {
       <BrowserRouter>
         <Header onConfirm={cartHandler} />
         {showCart && <Cart photosToCart={DummyPhotosArr} onClose={closeBtnHandler} />}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/ColorStore" element={<ColorStore photos={DummyPhotosArr} openCart={cartHandler} />} />
-          <Route path="/About" element={<About />} />
-          <Route path="/Contact" element={<Contact onSaveData={saveDataHandler} />} />
-        </Routes>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/ColorStore" render={() => <ColorStore photos={DummyPhotosArr} openCart={cartHandler} />} />
+          <Route path="/About" component={About} />
+          <Route path="/Contact" render={() => <Contact onSaveData={saveDataHandler} />} />
+        </Switch>
         <Footer />
       </BrowserRouter>
     </CartProvider>
