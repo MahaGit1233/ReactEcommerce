@@ -11,16 +11,15 @@ const Header = (props) => {
     let quantity = 0;
     cartCtx.items.forEach((item) => quantity = quantity + Number(item.quantity));
 
-    const showCartBtn=location.pathname==="/ColorStore";
-
     if (location.pathname === '/') {
         return (
             <div>
-                <Navbar bg="dark" variant="dark" style={{ fontFamily: "Times New Roman", position: "fixed", top: "0", left: "0", width: "100%", zIndex: "1000" }}>
+                <Navbar className="links" bg="dark" variant="dark" style={{ fontFamily: "Times New Roman", position: "fixed", top: "0", left: "0", width: "100%", zIndex: "1000" }}>
                     <Nav className="mx-auto">
-                        <NavLink to="/" className="nav-link" style={{ color: "white", marginRight: "1.5rem" }}>HOME</NavLink>
-                        <NavLink to="/ColorStore" className="nav-link" style={{ color: "white", marginRight: "1.5rem" }}>STORE</NavLink>
-                        <NavLink to="/about" className="nav-link" style={{ color: "white", marginRight: "1.5rem" }}>ABOUT</NavLink>
+                        <NavLink to="/" className={({isActive})=>(isActive?"nav-link active":"nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>HOME</NavLink>
+                        <NavLink to="/ColorStore" className={({isActive})=>(isActive?"nav-link active":"nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>STORE</NavLink>
+                        <NavLink to="/About" className={({isActive})=>(isActive?"nav-link active":"nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>ABOUT</NavLink>
+                        <NavLink to="/Contact" className={({isActive})=>(isActive?"nav-link active":"nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>CONTACT</NavLink>
                     </Nav>
                 </Navbar>
                 <div className="homeGeneric">
@@ -34,11 +33,12 @@ const Header = (props) => {
 
     return (
         <div>
-            <Navbar bg="dark" variant="dark" style={{ fontFamily: "Times New Roman", position: "fixed", top: "0", left: "0", width: "100%", zIndex: "1000" }}>
+            <Navbar className="links" bg="dark" variant="dark" style={{ fontFamily: "Times New Roman", position: "fixed", top: "0", left: "0", width: "100%", zIndex: "1000" }}>
                 <Nav className="mx-auto">
-                    <NavLink to="/" className="nav-link" style={{ color: "white", marginRight: "1.5rem" }}>HOME</NavLink>
-                    <NavLink to="/ColorStore" className="nav-link" style={{ color: "white", marginRight: "1.5rem" }}>STORE</NavLink>
-                    <NavLink to="/about" className="nav-link" style={{ color: "white", marginRight: "1.5rem" }}>ABOUT</NavLink>
+                    <NavLink to="/" className={({isActive})=>(isActive?"nav-link active":"nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>HOME</NavLink>
+                    <NavLink to="/ColorStore" className={({isActive})=>(isActive?"nav-link active":"nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>STORE</NavLink>
+                    <NavLink to="/About" className={({isActive})=>(isActive?"nav-link active":"nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>ABOUT</NavLink>
+                    <NavLink to="/Contact" className={({isActive})=>(isActive?"nav-link active":"nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>CONTACT</NavLink>
                 </Nav>
                 {location.pathname==='/ColorStore' && <Button onClick={props.onConfirm} style={{ marginRight: "1.5rem", backgroundColor: "whitesmoke", color: "black", border: "3px solid lightblue", borderRadius: "10px", paddingLeft: '0', paddingBottom: "0" }}><h4>Cart</h4> <h5 style={{ marginLeft: "5rem", marginTop: "-2.3rem", border: "1px solid blue", padding: "3px", paddingLeft: "5px", paddingRight: "5px", borderRadius: "6px" }}>{quantity}</h5></Button>}
             </Navbar>

@@ -3,6 +3,7 @@ import CartContext from "./cart-context";
 
 const CartProvider = (props) => {
     const [items, setItems] = useState([]);
+    const [totalAmount,setTotalAmount]=useState(0);
 
     const addItemToCartHandler = (item) => {
         setItems((prevItems) => {
@@ -15,16 +16,42 @@ const CartProvider = (props) => {
             }
             return [...prevItems, item];
         });
+        setTotalAmount((prevtotal)=>prevtotal+item.price*item.quantity);
     }
 
     const removeItemFromCartHandler = (id) => {
         setItems((prevItems) => {
-            return prevItems.filter(item => item.id !== id);
+            const existingItemIndex = prevItems.findIndex((item) => item.id === id);
+            const existingItem = prevItems[existingItemIndex];
+            
+            if (!existingItem) {
+                return prevItems;
+            }
+    
+            let updatedItems;
+            if (existingItem.quantity === 1) {
+                updatedItems = prevItems.filter((item) => item.id !== id);
+            } else {
+                const updatedItem = { ...existingItem, quantity: existingItem.quantity - 1 };
+                updatedItems = [...prevItems];
+                updatedItems[existingItemIndex] = updatedItem;
+            }
+    
+            return updatedItems;
+        });
+        
+        setTotalAmount((prevtotal)=>{
+            const existingItem=items.find((item)=>item.id===id);
+            if (existingItem){
+                return prevtotal-existingItem.price;
+            }
+            return prevtotal;
         })
     };
 
     const cartContext = {
         items: items,
+        totalAmount:totalAmount,
         addItem: addItemToCartHandler,
         removeItem: removeItemFromCartHandler,
     };

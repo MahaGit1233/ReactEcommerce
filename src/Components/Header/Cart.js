@@ -5,10 +5,15 @@ import CartContext from "../Store/cart-context";
 
 const Cart = (props) => {
     const cartCtx = useContext(CartContext);
+    const totalAmount = cartCtx.totalAmount.toFixed(2);
 
     const deleteBtnHandler = (id) => {
         cartCtx.removeItem(id);
     }
+
+    const purchaseBtnHandler = () => {
+        alert("Thank You for Purchasing!");
+    };
 
     const cartItems = cartCtx.items.map((item, index) => (
         <Row key={index}>
@@ -36,9 +41,9 @@ const Cart = (props) => {
                 {cartItems}
             </Container>
             <div className="total">
-                <h3>Total ₹0</h3>
+                <h3>Total ₹{totalAmount}</h3>
             </div>
-            <Button className="purchase" style={{ backgroundColor: "GrayText", borderColor: "white" }}>PURCHASE</Button>
+            <Button onClick={purchaseBtnHandler} className="purchase" style={{ backgroundColor: "GrayText", borderColor: "white" }}>PURCHASE</Button>
         </div>
     )
 }

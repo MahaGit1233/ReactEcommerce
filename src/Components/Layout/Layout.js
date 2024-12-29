@@ -4,7 +4,7 @@ import CartContext from "../Store/cart-context";
 import "./Layout.css"
 
 const Layout = (props) => {
-    const [quantity,setQuantity]=useState(1);
+    const [quantity, setQuantity] = useState(1);
 
     const cartCtx = useContext(CartContext);
 
@@ -14,7 +14,7 @@ const Layout = (props) => {
             title: photo.title,
             price: photo.price,
             imageUrl: photo.imageUrl,
-            quantity:quantity,
+            quantity: quantity,
         });
     };
 
@@ -26,13 +26,14 @@ const Layout = (props) => {
                         <Card className="mb-5" style={{ width: "300px" }}>
                             <Card.Body>
                                 <Card.Title>{photo.title}</Card.Title>
-                                <Card.Img src={photo.imageUrl} style={{ marginBottom: "15px" }} className="cardImg"/>
-                                <Card.Text>Price: ₹{photo.price}<Button style={{ marginLeft: "4rem" }} onClick={()=>addToCartHandler(photo)}>ADD TO CART</Button></Card.Text>
+                                <Card.Img src={photo.imageUrl} style={{ marginBottom: "15px" }} className="cardImg" />
+                                <Card.Text>Price: ₹{photo.price}<Button style={{ marginLeft: "4rem" }} onClick={() => addToCartHandler(photo)}>ADD TO CART</Button></Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
                 ))}
             </Row>
+            <div style={{ textAlign: "center", marginTop: "2rem" }}><Button onClick={props.onOpenCart} style={{ backgroundColor: "gray", fontWeight: "bold", color: "#56CCF2" }}>See the cart</Button></div>
         </Container>
     )
 }
