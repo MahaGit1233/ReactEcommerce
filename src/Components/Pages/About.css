@@ -1,0 +1,11 @@
+.about-image {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 2rem;
+    margin-top: 5rem;
+    transition: transform 0.3s ease;
+}
+
+.about-image:hover {
+    transform: translate3d(10px,10px,10px);
+}

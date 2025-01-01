@@ -3,7 +3,7 @@ import CartContext from "./cart-context";
 
 const CartProvider = (props) => {
     const [items, setItems] = useState([]);
-    const [totalAmount,setTotalAmount]=useState(0);
+    const [totalAmount, setTotalAmount] = useState(0);
 
     const addItemToCartHandler = (item) => {
         setItems((prevItems) => {
@@ -16,18 +16,18 @@ const CartProvider = (props) => {
             }
             return [...prevItems, item];
         });
-        setTotalAmount((prevtotal)=>prevtotal+item.price*item.quantity);
+        setTotalAmount((prevtotal) => prevtotal + item.price * item.quantity);
     }
 
     const removeItemFromCartHandler = (id) => {
         setItems((prevItems) => {
             const existingItemIndex = prevItems.findIndex((item) => item.id === id);
             const existingItem = prevItems[existingItemIndex];
-            
+
             if (!existingItem) {
                 return prevItems;
             }
-    
+
             let updatedItems;
             if (existingItem.quantity === 1) {
                 updatedItems = prevItems.filter((item) => item.id !== id);
@@ -36,24 +36,29 @@ const CartProvider = (props) => {
                 updatedItems = [...prevItems];
                 updatedItems[existingItemIndex] = updatedItem;
             }
-    
+
             return updatedItems;
         });
-        
-        setTotalAmount((prevtotal)=>{
-            const existingItem=items.find((item)=>item.id===id);
-            if (existingItem){
-                return prevtotal-existingItem.price;
+
+        setTotalAmount((prevtotal) => {
+            const existingItem = items.find((item) => item.id === id);
+            if (existingItem) {
+                return prevtotal - existingItem.price;
             }
             return prevtotal;
         })
     };
 
+    const clearCartHandler = () => {
+        setItems([]);
+    }
+
     const cartContext = {
         items: items,
-        totalAmount:totalAmount,
+        totalAmount: items.reduce((sum, item) => sum + item.price * item.quantity, 0),
         addItem: addItemToCartHandler,
         removeItem: removeItemFromCartHandler,
+        clearCart: clearCartHandler,
     };
 
     return (

@@ -11,10 +11,6 @@ const Cart = (props) => {
         cartCtx.removeItem(id);
     }
 
-    const purchaseBtnHandler = () => {
-        alert("Thank You for Purchasing!");
-    };
-
     const cartItems = cartCtx.items.map((item, index) => (
         <Row key={index}>
             <Col style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "-1rem" }}><Image src={item.imageUrl} className="img" /> <span style={{ paddingTop: "10px", marginLeft: "5rem", marginTop: "-3.5rem" }}>{item.title}</span></Col>
@@ -25,6 +21,12 @@ const Cart = (props) => {
             </Col>
         </Row>
     ));
+
+    const purchaseBtnHandler = () => {
+        cartCtx.clearCart();
+        cartCtx.totalAmount=0;
+        alert("Thank You for Purchasing!");
+    };
 
     return (
         <div className="backdrop">

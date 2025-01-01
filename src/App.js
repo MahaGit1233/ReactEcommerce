@@ -8,6 +8,8 @@ import About from "./Components/Pages/About";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Footer from "./Components/Layout/Footer";
 import Contact from "./Components/Pages/Contact";
+import Products from "./Components/Pages/Products";
+import ProductDetail from "./Components/Pages/ProductDetail";
 
 
 const DummyPhotosArr = [
@@ -50,6 +52,8 @@ function App() {
           <Route path="/ColorStore" render={() => <ColorStore photos={DummyPhotosArr} openCart={cartHandler} />} />
           <Route path="/About" component={About} />
           <Route path="/Contact" render={() => <Contact onSaveData={saveDataHandler} />} />
+          <Route path="/Products" exact component={Products} />
+          <Route path="/Products/:productId" component={ProductDetail} />
         </Switch>
         <Footer />
       </BrowserRouter>

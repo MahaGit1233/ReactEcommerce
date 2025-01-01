@@ -18,6 +18,16 @@
     padding-bottom: 50px;
 }
 
+.contents {
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    /* margin-left: 6.6rem; */
+}
+
 .links a:hover, 
 .links a:active,
 .links a.active {
