@@ -19,8 +19,9 @@ const Header = (props) => {
                         <NavLink to="/" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>HOME</NavLink>
                         <NavLink to="/ColorStore" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>STORE</NavLink>
                         <NavLink to="/About" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>ABOUT</NavLink>
-                        <NavLink to="/Contact" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>CONTACT</NavLink>
+                        <NavLink to="/Login" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>LOGIN</NavLink>
                         <NavLink to="/Products" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>PRODUCTS</NavLink>
+                        <NavLink to="/Contact" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>CONTACT</NavLink>
                     </Nav>
                 </Navbar>
                 <div className="homeGeneric">
@@ -40,8 +41,9 @@ const Header = (props) => {
                         <NavLink to="/" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>HOME</NavLink>
                         <NavLink to="/ColorStore" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>STORE</NavLink>
                         <NavLink to="/About" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>ABOUT</NavLink>
-                        <NavLink to="/Contact" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>CONTACT</NavLink>
+                        <NavLink to="/Login" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>LOGIN</NavLink>
                         <NavLink to="/Products" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>PRODUCTS</NavLink>
+                        <NavLink to="/Contact" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>CONTACT</NavLink>
                     </Nav>
                 </div>
                 {location.pathname === '/ColorStore' && <Button onClick={props.onConfirm} style={{ marginRight: "2rem", marginBottom: "-0.5rem", marginTop: "-0.5rem", backgroundColor: "whitesmoke", color: "black", border: "3px solid lightblue", borderRadius: "10px", paddingLeft: '0', paddingBottom: "0" }}><h5>Cart</h5> <h6 style={{ marginLeft: "4rem", marginTop: "-2.2rem", border: "1px solid blue", padding: "3px", paddingLeft: "5px", paddingRight: "5px", borderRadius: "6px" }}>{quantity}</h6></Button>}

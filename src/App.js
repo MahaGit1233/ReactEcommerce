@@ -1,7 +1,7 @@
 import Header from "./Components/Header/Header";
 import Cart from "./Components/Header/Cart";
 import CartProvider from "./Components/Store/CartProvider";
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import Home from "./Components/Pages/Home";
 import ColorStore from "./Components/Pages/ColorStore";
 import About from "./Components/Pages/About";
@@ -10,6 +10,9 @@ import Footer from "./Components/Layout/Footer";
 import Contact from "./Components/Pages/Contact";
 import Products from "./Components/Pages/Products";
 import ProductDetail from "./Components/Pages/ProductDetail";
+import Login from "./Components/Pages/Login";
+import AuthContext from "./Components/Store/auth-context";
+import { Redirect } from "react-router-dom";
 
 
 const DummyPhotosArr = [
@@ -21,6 +24,8 @@ const DummyPhotosArr = [
 
 function App() {
   const [showCart, setShowCart] = useState(false);
+
+  const authCtx = useContext(AuthContext);
 
   const cartHandler = () => {
     setShowCart(true);
@@ -51,9 +56,10 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/ColorStore" render={() => <ColorStore photos={DummyPhotosArr} openCart={cartHandler} />} />
           <Route path="/About" component={About} />
-          <Route path="/Contact" render={() => <Contact onSaveData={saveDataHandler} />} />
-          <Route path="/Products" exact component={Products} />
+          <Route path="/Login">{!authCtx.isLoggedIn?<Login />:<Redirect to='/Products' />}</Route>
+          <Route path="/Products" exact >{authCtx.isLoggedIn?<Products />:<Redirect to='/Login' />}</Route>
           <Route path="/Products/:productId" component={ProductDetail} />
+          <Route path="/Contact" render={() => <Contact onSaveData={saveDataHandler} />} />
         </Switch>
         <Footer />
       </BrowserRouter>
