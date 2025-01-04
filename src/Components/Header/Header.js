@@ -3,10 +3,12 @@ import './Header.css';
 import { Button, Nav, Navbar } from "react-bootstrap";
 import CartContext from "../Store/cart-context";
 import { NavLink, useLocation } from "react-router-dom";
+import AuthContext from "../Store/auth-context";
 
 const Header = (props) => {
     const cartCtx = useContext(CartContext);
     const location = useLocation();
+    const authCtx = useContext(AuthContext);
 
     let quantity = 0;
     cartCtx.items.forEach((item) => quantity = quantity + Number(item.quantity));
@@ -47,8 +49,11 @@ const Header = (props) => {
                     </Nav>
                 </div>
                 {location.pathname === '/ColorStore' && <Button onClick={props.onConfirm} style={{ marginRight: "2rem", marginBottom: "-0.5rem", marginTop: "-0.5rem", backgroundColor: "whitesmoke", color: "black", border: "3px solid lightblue", borderRadius: "10px", paddingLeft: '0', paddingBottom: "0" }}><h5>Cart</h5> <h6 style={{ marginLeft: "4rem", marginTop: "-2.2rem", border: "1px solid blue", padding: "3px", paddingLeft: "5px", paddingRight: "5px", borderRadius: "6px" }}>{quantity}</h6></Button>}
+                {location.pathname === '/Products' && <Button onClick={authCtx.logout} style={{ marginRight: "2rem", marginBottom: "-0.5rem", marginTop: "-0.5rem", backgroundColor: "whitesmoke", color: "black", border: "3px solid lightblue", borderRadius: "10px", paddingLeft: '010px', paddingBottom: "0" }}><h5>Logout</h5></Button>}
             </Navbar>
-            <h4 className="generic" style={{ fontSize: "4rem" }}>The Generics</h4>
+            <div style={{ marginTop: '-0.6rem' }}>
+                <h4 className="generic" style={{ fontSize: "4rem" }}>The Generics</h4>
+            </div>
         </div>
     )
 }
