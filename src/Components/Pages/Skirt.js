@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
+import CartContext from "../Store/cart-context";
 
 const Skirt = () => {
+    const [quantity, setQuantity] = useState(1);
+
+    const cartCtx = useContext(CartContext);
+
+    const addToCartHandler = () => {
+        cartCtx.addItem({
+            title: 'Skirt',
+            price: 1000,
+            imageUrl: '/Skirts/front.avif',
+            quantity: quantity,
+        });
+    };
+
     return (
         <div style={{ fontFamily: "HP Simplified Light" }}>
             <h1 style={{textAlign:"center"}}>Skirt</h1>
@@ -22,7 +36,8 @@ const Skirt = () => {
                     </Row>
                     <div style={{ display: "flex", marginTop: "2%" }}>
                         <h1 style={{ marginTop: "2%" }}>₹1000</h1>
-                        <div style={{ marginLeft: "53%", marginTop: "2.5%" }}>
+                        <div style={{ display:'flex', gap:"3%", marginLeft: "30%", marginTop: "0.5%" }}>
+                            <Button onClick={addToCartHandler} >ADD TO CART</Button>
                             <Button>BUY NOW</Button>
                         </div>
                     </div>

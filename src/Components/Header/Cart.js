@@ -5,12 +5,14 @@ import CartContext from "../Store/cart-context";
 
 const Cart = (props) => {
     const cartCtx = useContext(CartContext);
-    const totalAmount = cartCtx.totalAmount.toFixed(2);
+    const totalAmount = cartCtx.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     const deleteBtnHandler = (id) => {
         cartCtx.removeItem(id);
+        console.log(id);
     }
-
+    console.log(cartCtx.items);
+    
     const cartItems = cartCtx.items.map((item, index) => (
         <Row key={index}>
             <Col style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "-1rem" }}><Image src={item.imageUrl} className="img" /> <span style={{ paddingTop: "10px", marginLeft: "5rem", marginTop: "-3.5rem" }}>{item.title}</span></Col>

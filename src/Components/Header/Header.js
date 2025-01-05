@@ -1,17 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import './Header.css';
 import { Button, Nav, Navbar } from "react-bootstrap";
 import CartContext from "../Store/cart-context";
 import { NavLink, useLocation } from "react-router-dom";
 import AuthContext from "../Store/auth-context";
+import { useRouteMatch } from "react-router-dom";
+import Cart from "./Cart";
 
 const Header = (props) => {
+    const [showCart, setShowCart] = useState(false);
+
     const cartCtx = useContext(CartContext);
     const location = useLocation();
     const authCtx = useContext(AuthContext);
+    const productMatch = useRouteMatch("/Products/:productId")
 
     let quantity = 0;
     cartCtx.items.forEach((item) => quantity = quantity + Number(item.quantity));
+
+    const cartGetItemHandler = () => {
+        cartCtx.getItem();
+        setShowCart(true);
+    }
+
+    const closeBtnHandler = () => {
+        setShowCart(false);
+    }
 
     if (location.pathname === '/') {
         return (
@@ -48,8 +62,10 @@ const Header = (props) => {
                         <NavLink to="/Contact" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} style={{ color: "white", marginRight: "1.5rem" }}>CONTACT</NavLink>
                     </Nav>
                 </div>
-                {location.pathname === '/ColorStore' && <Button onClick={props.onConfirm} style={{ marginRight: "2rem", marginBottom: "-0.5rem", marginTop: "-0.5rem", backgroundColor: "whitesmoke", color: "black", border: "3px solid lightblue", borderRadius: "10px", paddingLeft: '0', paddingBottom: "0" }}><h5>Cart</h5> <h6 style={{ marginLeft: "4rem", marginTop: "-2.2rem", border: "1px solid blue", padding: "3px", paddingLeft: "5px", paddingRight: "5px", borderRadius: "6px" }}>{quantity}</h6></Button>}
-                {location.pathname === '/Products' && <Button onClick={authCtx.logout} style={{ marginRight: "2rem", marginBottom: "-0.5rem", marginTop: "-0.5rem", backgroundColor: "whitesmoke", color: "black", border: "3px solid lightblue", borderRadius: "10px", paddingLeft: '010px', paddingBottom: "0" }}><h5>Logout</h5></Button>}
+                {location.pathname === '/ColorStore' && <Button onClick={cartGetItemHandler} style={{ marginRight: "2rem", marginBottom: "-0.5rem", marginTop: "-0.5rem", backgroundColor: "whitesmoke", color: "black", border: "3px solid lightblue", borderRadius: "10px", paddingLeft: '0', paddingBottom: "0" }}><h5>Cart</h5> <h6 style={{ marginLeft: "4rem", marginTop: "-2.2rem", border: "1px solid blue", padding: "3px", paddingLeft: "5px", paddingRight: "5px", borderRadius: "6px" }}>{quantity}</h6></Button>}
+                {location.pathname === '/Products' && <div style={{ display: 'flex' }}><Button onClick={cartGetItemHandler} style={{ marginRight: "2rem", marginBottom: "-0.5rem", marginTop: "-0.5rem", backgroundColor: "whitesmoke", color: "black", border: "3px solid lightblue", borderRadius: "10px", paddingLeft: '0', paddingBottom: "0" }}><h5>Cart</h5> <h6 style={{ marginLeft: "4rem", marginTop: "-2.2rem", border: "1px solid blue", padding: "3px", paddingLeft: "5px", paddingRight: "5px", borderRadius: "6px" }}>{quantity}</h6></Button> <Button onClick={authCtx.logout} style={{ marginRight: "2rem", marginBottom: "-0.5rem", marginTop: "-0.5rem", backgroundColor: "whitesmoke", color: "black", border: "3px solid lightblue", borderRadius: "10px", paddingLeft: '010px', paddingBottom: "0" }}><h5>Logout</h5></Button></div>}
+                {productMatch && <Button onClick={cartGetItemHandler} style={{ marginRight: "2rem", marginBottom: "-0.5rem", marginTop: "-0.5rem", backgroundColor: "whitesmoke", color: "black", border: "3px solid lightblue", borderRadius: "10px", paddingLeft: '0', paddingBottom: "0" }}><h5>Cart</h5> <h6 style={{ marginLeft: "4rem", marginTop: "-2.2rem", border: "1px solid blue", padding: "3px", paddingLeft: "5px", paddingRight: "5px", borderRadius: "6px" }}>{quantity}</h6></Button>}
+                {showCart && <Cart onClose={closeBtnHandler} />}
             </Navbar>
             <div style={{ marginTop: '-0.6rem' }}>
                 <h4 className="generic" style={{ fontSize: "4rem" }}>The Generics</h4>

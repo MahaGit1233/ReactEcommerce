@@ -11,6 +11,14 @@ import TShirt from "./Tshirt";
 
 const ProductDetail = () => {
     const params=useParams();
+    const products=[
+        {id: 'sweatshirt', title:'SweatShirt', mainImg:'\SweatShirts\main.avif', front:'\SweatShirts\front.avif', price:1500},
+        {id: 'trenchcoat', title:'TrenchCoat', mainImg:'\TrenchCoats\main.avif', front:'\TrenchCoats\front.avif', price:1250},
+        {id: 'sweater', title:'Sweater', mainImg:'\Sweaters\main.avif', front:'\Sweaters\front.avif', price:800},
+        {id: 'skirt', title:'Skirt', mainImg:'\Skirts\main.avif', front:'\Skirts\front.avif', price:1000},
+        {id: 'trouser', title:'Trousers', mainImg:'\Trousers\main.avif', front:'\Trousers\front.avif', price:900},
+        {id: 'tshirt', title:'Tshirt', mainImg:'\Tshirts\main.avif', front:'\Tshirts\front.webp', price:1000},
+    ]
 
     return (
         <div>

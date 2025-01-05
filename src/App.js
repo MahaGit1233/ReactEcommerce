@@ -13,6 +13,8 @@ import ProductDetail from "./Components/Pages/ProductDetail";
 import Login from "./Components/Pages/Login";
 import AuthContext from "./Components/Store/auth-context";
 import { Redirect } from "react-router-dom";
+import axios from "axios";
+import CartContext from "./Components/Store/cart-context";
 
 
 const DummyPhotosArr = [
@@ -23,17 +25,21 @@ const DummyPhotosArr = [
 ];
 
 function App() {
-  const [showCart, setShowCart] = useState(false);
+  // const [showCart, setShowCart] = useState(false);
 
+  // // const cartCtx = useContext(CartContext);
   const authCtx = useContext(AuthContext);
 
-  const cartHandler = () => {
-    setShowCart(true);
-  }
+  // // // photosToCart={DummyPhotosArr}
 
-  const closeBtnHandler = () => {
-    setShowCart(false);
-  }
+  // // const cartHandler = () => {
+  // //   cartCtx.getItem();
+  // //   setShowCart(true);
+  // // }
+
+  // // const closeBtnHandler = () => {
+  // //   setShowCart(false);
+  // // }
 
   const saveDataHandler = useCallback(async (enteredData) => {
     const response = await fetch("https://react-api-73b69-default-rtdb.firebaseio.com/ecommerce.json", {
@@ -50,14 +56,13 @@ function App() {
   return (
     <CartProvider>
       <BrowserRouter>
-        <Header onConfirm={cartHandler} />
-        {showCart && <Cart photosToCart={DummyPhotosArr} onClose={closeBtnHandler} />}
+        <Header/>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/ColorStore" render={() => <ColorStore photos={DummyPhotosArr} openCart={cartHandler} />} />
+          <Route path="/ColorStore" render={() => <ColorStore photos={DummyPhotosArr}/>} />
           <Route path="/About" component={About} />
-          <Route path="/Login">{!authCtx.isLoggedIn?<Login />:<Redirect to='/Products' />}</Route>
-          <Route path="/Products" exact >{authCtx.isLoggedIn?<Products />:<Redirect to='/Login' />}</Route>
+          <Route path="/Login">{!authCtx.isLoggedIn ? <Login /> : <Redirect to='/Products' />}</Route>
+          <Route path="/Products" exact >{authCtx.isLoggedIn ? <Products /> : <Redirect to='/Login' />}</Route>
           <Route path="/Products/:productId" component={ProductDetail} />
           <Route path="/Contact" render={() => <Contact onSaveData={saveDataHandler} />} />
         </Switch>
